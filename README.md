@@ -1,0 +1,2 @@
+# Computer_Network_notes
+Computer network involves a lot of important knowledge and ideas. After reading James F. kurose's "computer networking -- a top-down approach" sixth edition and its corresponding Chinese version: 《计算机网络——自顶向下方法》 seventh edition, I have a basic understanding of this field. Here are the notes about the key concepts in Computer Network. Brief description about the framework and main contents of these notes lies in README.md.
