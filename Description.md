@@ -77,15 +77,155 @@
 
 # 3 .	Network Layer
 
+#### Basic concepts:
 
+- 网络层提供的两种服务
+  - 虚电路服务
+  - 数据报服务
+- IP地址分类，特殊的IP地址，IP地址与硬件地址（MAC）对比
+- IP数据报格式
+- 子网划分与子网掩码
+- 路由器转发算法
+
+#### IP
+
+- ICMP (Internet Control Message Protocol, 网际控制报文协议)
+
+  允许**主机、路由器**报告差错信息（时间超时，终点不可达等）和异常情况，使得IP协议更有效的转发数据报和提高数据报交付成功的机会。
+
+  - 应用
+
+    PING: 使用ICMP的require, request 报文，测试两个host之间是否连通
+
+    Traceroute: 使用ICMP的**时间超过**差错报告报文，跟踪一个分组从源点到终点的路径
+
+- IGMP (Internet Group Management Protocol, 网际组管理协议)
+
+  使得多播路由器知道多播组成员信息，多播组的组成员之间知道彼此的信息（成员加入，退出信息）
+
+- ARP (Address Resolution Protocol, 地址解析协议)
+
+  解析目的IP地址到目的MAC地址，并将其加入IP数据报发送
+
+#### 路由选择协议
+
+- IGP  (Internal Gate Protocol, 内部网关协议)
+
+  自治系统内部使用的协议。
+
+  - RIP  (Router Information Protocol, 路由信息协议)
+  - OSPF (Open Shortest Path First, 开放最短路径优先)
+
+- EGP (External Gate Protocol, 外部网关协议)
+
+  源站、目的站处于不同的自治系统中，需要EGP协议将路由选择信息传递到另一个自治系统中。
+
+  - BGP
+
+- 多播路由选择协议
+
+  - Flooding and Cut
+  - Tunneling
+  - 基于核心发现技术
+
+#### IPV4, IPV6
+
+- IPV4对比IPV6
+  1. 32 --> 128
+  2. IPV6即插即用，无需DHCP
+  3. IPV6支持资源预分配
+  4. 零压缩表示形式
+- IPV4到IPV6过渡
+  - 双协议栈
+  - 隧道技术
+
+#### 多播, VPN, NAT
 
 # 4 .	Data Link Layer 
 
+#### Basic concepts
 
+- 什么是Data Link:
+
+  Link + Protocol。Link 为点到点的物理链路；Protocol为通信协议，通过软硬件配合实现
+
+  Data Link: 时效性； Link: 长期性
+
+- 数据链路层的作用
+
+  将数据**可靠的传输**到**相邻的结点**。
+
+  （网络层作用：实现两个**端系统**之间的**逻辑通信**；运输层作用：实现两个**端系统的应用程序**之间的逻辑通信）
+
+- 数据链路层协议
+
+  - PPP：一对一的通信方式
+  - 广播信道：一对多的通信方式
+
+- 数据链路层三个基本问题
+
+  - 封装成帧
+
+    将来自网络层的IP数据报加上数据链路层头部（SOH）、尾部（EOT）封装成数据链路层帧发送
+
+  - 透明传输
+
+    封装成帧的步骤**不能破坏原始的数据**（原始数据中出现SOH,EOH则错误的找到帧边界，造成数据不完整）。通常采用字节填充法往SOH,EOH前填充ESC解决。
+
+  - 差错检测
+
+    CRC  (Cyclic Redundancy Check, 循环校验检测)
+
+- CSMA/CD
+- 集线器与星型拓扑
+
+#### 以太网MAC 帧
+
+- MAC地址
+
+  局域网通信设备、端口唯一的标识符，有48位，前24位是序列号（生产厂商自行分配），后24位是供应商代码（IEEE管理）
+
+- MAC帧类型
+
+  1. unicast (单播)
+  2. multi-cast (多播)
+  3. broadcast (广播)
+
+- MAC帧格式
+
+Note: 以太网MAC帧不必有结束符，而PPP帧要有，因为以太网的sender每次发送完一个MAC帧都需要delay 一个 $t$的时间（使得发送者与未发送者重新处于公平竞争状态），这段时间可以作为MAC帧结束符。
+
+#### 以太网的扩展
+
+- Physical layer
+
+  使用Huber (集线器)进行星形扩展
+
+- Data Link layer
+
+  使用 L2 switch (以太网交换机) 进行扩展 
+
+- VLAN (Virtual LAN)
+
+  VLAN是一些具有某些共同需求的LAN网段构成的逻辑组（Virtual Group），它提供了一种资源整合、按需提取的服务，有效避免了广播风暴。
 
 # 5 .	Physical Layer
 
+#### Basic concepts
 
+- 速率
+- 带宽
+- 时延
+- 吞吐量
+
+#### 常用编码方式
+
+- 不归零制
+- 归零制
+- 曼彻斯特
+- 差分曼彻斯特
+
+#### 信噪比、香农公式
 
 # 6 .	Advanced Topics
 
